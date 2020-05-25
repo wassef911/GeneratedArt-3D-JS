@@ -1,9 +1,7 @@
 // Ensure ThreeJS is in global scope for the 'examples/'
+import random from "canvas-sketch-util/random";
+import palettes from "nice-color-palettes";
 global.THREE = require("three");
-
-// Include any additional ThreeJS examples below
-require("three/examples/js/controls/OrbitControls");
-
 const canvasSketch = require("canvas-sketch");
 
 const settings = {
@@ -21,26 +19,27 @@ const sketch = ({ context }) => {
 
   // WebGL background color
   renderer.setClearColor("hsl(0,0%,85%)", 1);
-
   // Setup a camera
   const camera = new THREE.OrthographicCamera(50, 1, 0.01, 100);
-
-  // Setup camera controller
-
   // Setup your scene
   const scene = new THREE.Scene();
 
-  // Setup a geometry
   const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const palette = random.pick(palettes);
+  for (let i = 0; i < 15; i++) {
+    const material = new THREE.MeshStandardMaterial({
+      color: random.pick(palette),
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(random.value(), random.value(), random.value());
+    mesh.scale.multiplyScalar(random.range(0.01, 0.2));
+    scene.add(mesh);
+  }
+  //ambient light   scene.add(new THREE.AmbientLight("white"));
 
-  // Setup a material
-  const material = new THREE.MeshBasicMaterial({
-    color: "red",
-  });
-
-  // Setup a mesh with geometry + material
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
+  const light = new THREE.DirectionalLight("white", 1);
+  light.position.set(1, 4, 2);
+  scene.add(light);
 
   // draw each frame
   return {
