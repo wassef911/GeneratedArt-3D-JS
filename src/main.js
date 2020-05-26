@@ -2,12 +2,12 @@ import eases from "eases";
 import canvasSketch from "canvas-sketch";
 
 import Init from "./initScene";
-import createObjects from "./objects";
+import createObjects from "./objects-to-render/objects";
 import createLight from "./light";
 import handleResize from "./handleResize";
 
 const settings = {
-  dimensions: [1500, 800],
+  dimensions: [2200, 1000],
   fps: 24,
   duration: 5,
   animate: true, // Make the loop animated

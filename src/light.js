@@ -1,9 +1,8 @@
 import * as THREE from "three";
 
 export default (scene) => {
-  //ambient light
-  scene.add(new THREE.AmbientLight("white", 0.65));
+  scene.add(new THREE.AmbientLight("white", 0.3));
   const light = new THREE.DirectionalLight("white", 1);
-  light.position.set(1, 4, 2);
+  light.position.set(2, 1, 1);
   scene.add(light);
 };
