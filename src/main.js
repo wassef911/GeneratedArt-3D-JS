@@ -7,9 +7,9 @@ import createLight from "./light";
 import handleResize from "./handleResize";
 
 const settings = {
-  dimensions: [1000, 1000],
+  dimensions: [1500, 800],
   fps: 24,
-  duration: 4,
+  duration: 5,
   animate: true, // Make the loop animated
   context: "webgl", // Get a WebGL canvas rather than 2D
 };
@@ -27,11 +27,11 @@ const sketch = ({ context }) => {
       });
     },
     render({ playhead }) {
-      const time = Math.sin(playhead * Math.PI * 2) * 0.75;
+      const time = Math.sin(playhead * Math.PI * 2) * 0.2;
       scene.rotation.y = eases.quadInOut(time);
+
       renderer.render(scene, camera);
     },
-    // Dispose of events & renderer for cleaner hot-reloading
     unload() {
       renderer.dispose();
     },
